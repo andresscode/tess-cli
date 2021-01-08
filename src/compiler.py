@@ -65,7 +65,7 @@ def compile_files(files, meta, root_dir):
 def get_compilable_files(cwd):
     root_dir = find_root_directory(cwd)
     source_files = get_source_files(root_dir)
-    compilers_meta = load_dict('templates.config', 'compilers.json')
+    compilers_meta = load_dict('resources.config', 'compilers.json')
     return get_files_to_compile(source_files, compilers_meta)
 
 
