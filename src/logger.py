@@ -26,10 +26,9 @@ def remove_log_comments(file: Path) -> str:
 
 
 def make_debug_file(filename: str):
-    click.echo('Creating debuggable file.')
     file = Path(f'{solutions_absolute_path()}/{filename}')
     file_content = remove_log_comments(file)
     new_file = Path(f'{debug_solutions_absolute_path()}/{file.name}')
     new_file.touch()
     new_file.write_text(file_content)
-    click.echo('File created.')
+    click.echo('Debuggable file created.')
