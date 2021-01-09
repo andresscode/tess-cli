@@ -3,8 +3,10 @@ class Directory:
     CASES = 'cases'
     BUILD = 'build'
     TESS = '.tess'
+    DEBUG_SOLUTIONS = '.tess/debug/src'
+    DEBUG_BUILD = '.tess/debug/build'
 
     @staticmethod
-    def all():
+    def init():
         return [Directory.SOLUTIONS, Directory.CASES, Directory.BUILD,
-                Directory.TESS]
+                Directory.DEBUG_SOLUTIONS, Directory.DEBUG_BUILD]

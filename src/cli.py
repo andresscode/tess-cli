@@ -4,6 +4,7 @@ import click
 
 from src.compiler import compile_cmd, compilable_files
 from src.initializer import make_template
+from src.logger import make_debug_file, source_files
 from src.runner import runnable_files, test_cases, run_solution
 from src.scripts import make_completion_script
 from src.stresser import run_stress
@@ -87,11 +88,19 @@ def stress(model, solution, seed, number, args, line):
     run_stress(model, solution, seed, number, args.split(), line)
 
 
+@click.command('debug')
+@click.argument('file', required=True,
+                type=click.STRING, autocompletion=source_files)
+def debug(file):
+    make_debug_file(file)
+
+
 cli.add_command(auto_complete)
 cli.add_command(init)
 cli.add_command(build)
 cli.add_command(run)
 cli.add_command(stress)
+cli.add_command(debug)
 
 
 def main():

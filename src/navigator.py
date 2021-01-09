@@ -6,9 +6,10 @@ from src.directories import Directory
 
 
 def make_dirs(path):
-    dirs = {name: f'{path}/{name}' for name in Directory.all()}
+    dirs = {name: f'{path}/{name}' for name in Directory.init()}
     for _dir in dirs:
-        os.mkdir(_dir)
+        d = Path(_dir)
+        d.mkdir(parents=True, exist_ok=True)
     return dirs
 
 
@@ -61,6 +62,16 @@ def solutions_absolute_path():
 def build_absolute_path():
     root_dir = find_root_directory(os.getcwd())
     return f'{root_dir}/{Directory.BUILD}'
+
+
+def debug_solutions_absolute_path():
+    root_dir = find_root_directory(os.getcwd())
+    return f'{root_dir}/{Directory.DEBUG_SOLUTIONS}'
+
+
+def debug_build_absolute_path():
+    root_dir = find_root_directory(os.getcwd())
+    return f'{root_dir}/{Directory.DEBUG_BUILD}'
 
 
 def list_files(_dir: Directory, _ext=None) -> list:
