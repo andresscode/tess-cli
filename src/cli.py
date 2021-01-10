@@ -2,10 +2,10 @@ import os
 
 import click
 
-from src.compiler import compile_cmd, compilable_files
+from src.compiler import compile_cmd, compilable_files, any_file_compiled
 from src.initializer import make_template
-from src.logger import make_debug_file, source_files
-from src.runner import runnable_files, test_cases, run_solution
+from src.logger import make_debug_file
+from src.runner import runnable_files, test_cases, run_solution, solutions
 from src.scripts import make_completion_script
 from src.stresser import run_stress
 
@@ -50,23 +50,30 @@ def init(lang, empty):
 def build(file):
     """Compiles source code files."""
     try:
-        compile_cmd(file)
-        if file:
-            click.echo('File compiled successfully.')
+        compiled_files = compile_cmd(file)
+        if any_file_compiled(compiled_files):
+            if file:
+                click.echo('File compiled successfully.')
+            else:
+                click.echo('All files compiled successfully.')
         else:
-            click.echo('All files compiled successfully.')
-    except FileNotFoundError as err:
+            click.echo('No files found to compile.')
+    except (FileNotFoundError, KeyError) as err:
         click.echo(err)
 
 
 @click.command('run')
+@click.option('-d', '--debug', is_flag=True,
+              help='Runs the solution in debug mode.')
 @click.argument('file', required=True,
-                type=click.STRING, autocompletion=runnable_files)
+                type=click.STRING, autocompletion=solutions)
 @click.argument('test', required=False,
                 type=click.STRING, autocompletion=test_cases)
-def run(file, test):
+def run(file, test, debug):
     """Tests an algorithm using pre-defined test cases."""
-    run_solution(file, test)
+    if debug:
+        make_debug_file(file)
+    run_solution(file, test, debug)
 
 
 @click.command('stress')
@@ -88,19 +95,11 @@ def stress(model, solution, seed, number, args, line):
     run_stress(model, solution, seed, number, args.split(), line)
 
 
-@click.command('debug')
-@click.argument('file', required=True,
-                type=click.STRING, autocompletion=source_files)
-def debug(file):
-    make_debug_file(file)
-
-
 cli.add_command(auto_complete)
 cli.add_command(init)
 cli.add_command(build)
 cli.add_command(run)
 cli.add_command(stress)
-cli.add_command(debug)
 
 
 def main():

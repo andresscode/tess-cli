@@ -4,9 +4,11 @@ import subprocess
 
 import click
 
+from src.compiler import should_be_compiled, compile_cmd
 from src.directories import Directory
 from src.navigator import list_files, cases_absolute_path, \
-    build_absolute_path, solutions_absolute_path
+    build_absolute_path, solutions_absolute_path, debug_build_absolute_path, \
+    debug_solutions_absolute_path
 from src.resources import runners_meta
 
 
@@ -19,8 +21,23 @@ def runnable_files(ctx, args, incomplete):
     return [file for file in files if incomplete in file]
 
 
+def solutions(ctx, args, incomplete):
+    return [file for file in list_files(Directory.SOLUTIONS)
+            if incomplete in file]
+
+
 def test_cases(ctx, args, incomplete):
     return [file for file in list_files(Directory.CASES) if incomplete in file]
+
+
+def resolve_runnable_filename(source_filename: str):
+    name, ext = os.path.splitext(source_filename)
+    if ext == '.cpp' or ext == '.cc':
+        return name
+    elif ext == '.java':
+        return f'{name}.class'
+    else:
+        return source_filename
 
 
 def runner_meta(file):
@@ -84,31 +101,40 @@ def run_tests(args: list, tests: list):
                     f'[Output] Time: {millis}ms\n{output.stdout.strip()}')
 
 
-def concat_file_absolute_path(file, meta=None):
-    if not meta or meta['type'] == 'compiled':
-        return f'{build_absolute_path()}/{file}'
+def concat_absolute_path(file, meta=None, debug=False):
+    if debug:
+        if not meta or meta['type'] == 'compiled':
+            return f'{debug_build_absolute_path()}/{file}'
+        else:
+            return f'{debug_solutions_absolute_path()}/{file}'
     else:
-        return f'{solutions_absolute_path()}/{file}'
+        if not meta or meta['type'] == 'compiled':
+            return f'{build_absolute_path()}/{file}'
+        else:
+            return f'{solutions_absolute_path()}/{file}'
 
 
-def resolve_file_name(file, meta=None):
+def resolve_file_name(file, meta=None, debug=False):
     name, ext = os.path.splitext(file)
     if ext == '.class':
-        return concat_file_absolute_path(name, meta)
+        return concat_absolute_path(name, meta, debug)
     else:
-        return concat_file_absolute_path(file, meta)
+        return concat_absolute_path(file, meta, debug)
 
 
-def runner_args(filename: str) -> list:
+def runner_args(filename: str, debug=False) -> list:
     meta = runner_meta(filename)
     if not meta:
-        args = [f'{resolve_file_name(filename)}']
+        args = [f'{resolve_file_name(filename, None, debug)}']
     else:
-        filename = resolve_file_name(filename, meta)
+        filename = resolve_file_name(filename, meta, debug)
         args = [f'{meta["runner"]}']
         if meta['runner'] == 'java':
             args.append('-cp')
-            args.append(build_absolute_path())
+            if debug:
+                args.append(debug_build_absolute_path())
+            else:
+                args.append(build_absolute_path())
             args.append(os.path.split(filename)[1])
         else:
             args.append(filename)
@@ -117,10 +143,13 @@ def runner_args(filename: str) -> list:
     return args
 
 
-def run_solution(file, test):
+def run_solution(file, test, debug=False):
+    if should_be_compiled(file):
+        compile_cmd(file, debug)
+        file = resolve_runnable_filename(file)
     if test:
         tests = concat_cases_absolute_path([test])
     else:
         tests = concat_cases_absolute_path(list_files(Directory.CASES))
-    args = runner_args(file)
+    args = runner_args(file, debug)
     run_tests(args, tests)

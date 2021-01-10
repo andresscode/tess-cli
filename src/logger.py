@@ -12,15 +12,33 @@ def source_files(ctx, args, incomplete):
     return [file for file in files if incomplete in file]
 
 
+def py_validations(line: str) -> str:
+    if '"""@log' in line or '"""' in line:
+        return ''
+    elif '#@log' in line:
+        return line.replace('#@log ', '')
+    else:
+        return line
+
+
+def cpp_style_validations(line: str) -> str:
+    if '/*@log' in line or '*/' in line:
+        return ''
+    elif '//@log' in line:
+        return line.replace('//@log ', '')
+    else:
+        return line
+
+
 def remove_log_comments(file: Path) -> str:
     with file.open() as f:
         lines = f.readlines()
         content = ''
         for line in lines:
-            if '/*@log' in line or '*/' in line:
-                line = ''
-            elif '//@log' in line:
-                line = line.replace('//@log ', '')
+            if file.suffix == '.py':
+                line = py_validations(line)
+            else:
+                line = cpp_style_validations(line)
             content = content + line
     return content
 
