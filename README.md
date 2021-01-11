@@ -51,3 +51,39 @@ on top of the previous one to enable the auto-completion for the shell. Your
     . /location/tess-completion.sh
 
 Now, you should be able to start using Tess with its auto-completion feature on.
+
+## Getting Started
+You can watch how to use Tess [here](https://www.youtube.com/).
+
+## Contribute
+Tess is the result of the testing practices learned from the 
+[Algorithmic Toolbox](https://www.coursera.org/learn/algorithmic-toolbox?specialization=data-structures-algorithms)
+course offered by [Coursera](https://www.coursera.org/). It is a work in 
+progress, aiming to help other students like me enrolled in the [Data Structures 
+and Algorithms Specialization](https://www.coursera.org/specializations/data-structures-algorithms) 
+to test their algorithms using the stress testing 
+approach suggested in the course easing the process and allowing the students to 
+use different programming languages to create their models and solutions.
+
+### How can I contribute?
+Tess is a new tool looking to grow and help more students and anyone who is 
+interested and needs to test algorithms in an efficient and simple way, without 
+restricting you to use a particular programming language or IDE. Currently, Tess 
+is supporting three programming languages, **Python**, **C++**, and **Java**; 
+one of the main goals of Tess is to give support to more programming languages 
+but,  as the code base grows and more features are added, the need for a more 
+reliable and flexible code is critical to achieving this. Here you can find a 
+list of tasks that would help the project to grow and improve the user's 
+experience:
+
+* **Unit testing:** This is the top priority at this point.
+* **Testing and reporting issues:** You can contribute using the tool and 
+reporting any bugs to my [email](andressbox90@gmail.com).
+* **Code documentation:** Code is not documented, this is critical to make it
+easier for more developers to join in.
+* **OOP migration:** Any contributions refactoring code to make it more 
+object-oriented would be very appreciated. 
+
+Please feel free to [contact me](andressbox90@gmail.com) to report something 
+else that is not part of this documentation or if you want more information 
+about the project and how to contribute.
