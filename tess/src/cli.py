@@ -2,12 +2,12 @@ import os
 
 import click
 
-from src.compiler import compile_cmd, compilable_files, any_file_compiled
-from src.initializer import make_template
-from src.logger import make_debug_file
-from src.runner import runnable_files, test_cases, run_solution, solutions
-from src.scripts import make_completion_script
-from src.stresser import run_stress
+from tess.src.compiler import compile_cmd, compilable_files, any_file_compiled
+from tess.src.initializer import make_template
+from tess.src.logger import make_debug_file
+from tess.src.runner import runnable_files, test_cases, run_solution, solutions
+from tess.src.scripts import make_completion_script
+from tess.src.stresser import run_stress
 
 
 @click.group()

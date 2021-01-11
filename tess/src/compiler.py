@@ -5,8 +5,8 @@ import subprocess
 import click
 from pkg_resources import resource_string
 
-from src.directories import Directory
-from src.navigator import find_root_directory
+from tess.src.directories import Directory
+from tess.src.navigator import find_root_directory
 
 
 def get_source_files(root_dir):
@@ -32,7 +32,7 @@ def get_files_to_compile(files, meta):
 
 
 def should_be_compiled(filename: str):
-    compilers_meta = load_dict('resources.config', 'compilers.json')
+    compilers_meta = load_dict('tess.resources.config', 'compilers.json')
     for _, lang in compilers_meta.items():
         if os.path.splitext(filename)[1] in lang['extensions']:
             return True
@@ -94,7 +94,7 @@ def compile_files(files, meta, root_dir, debug=False):
 def get_compilable_files(cwd):
     root_dir = find_root_directory(cwd)
     source_files = get_source_files(root_dir)
-    compilers_meta = load_dict('resources.config', 'compilers.json')
+    compilers_meta = load_dict('tess.resources.config', 'compilers.json')
     return get_files_to_compile(source_files, compilers_meta)
 
 
@@ -108,7 +108,7 @@ def compilable_files(ctx, args, incomplete):
 def compile_cmd(file, debug=False):
     root_dir = find_root_directory(os.getcwd())
     source_files = get_source_files(root_dir)
-    compilers_meta = load_dict('resources.config', 'compilers.json')
+    compilers_meta = load_dict('tess.resources.config', 'compilers.json')
     to_compile = get_files_to_compile(source_files, compilers_meta)
     if file:
         _, ext = os.path.splitext(file)

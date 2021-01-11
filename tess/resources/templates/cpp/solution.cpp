@@ -3,8 +3,14 @@
 int solve(int nums[], int n)
 {
     int sum = 0;
-    for (size_t i = 0; i < n; ++i)
+    //@log std::cout << "<sum> initialized to: " << sum << "\n";
+    for (size_t i = 0; i < n; ++i) {
+        /*@log
+        std::cout << "Adding num: <" << nums[i] << ">\n";
+        std::cout << nums[i] << " + " << sum << " = " << nums[i] + sum << "\n";
+        */
         sum += nums[i];
+    }
     return sum;
 }
 

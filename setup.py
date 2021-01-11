@@ -4,22 +4,21 @@ with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setuptools.setup(
-    name='tess-username',
-    version='0.0.1',
+    name='tess-andresscode',
+    version='0.1.0',
     author='Andres Martinez',
     author_email='andressbox90@gmail.com',
     description='Stress testing CLI tool.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com',
+    url='https://github.com/andresscode/tess',
     packages=setuptools.find_packages(),
-    package_data={
-        'templates': ['*.json', '*.cpp', '*.java', '*.py', '*.txt'],
-    },
+    include_package_data=True,
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: MacOS'
     ],
     python_requires='>=3.7',
     install_requires=[
@@ -27,6 +26,6 @@ setuptools.setup(
     ],
     entry_points='''
         [console_scripts]
-        tess=src.cli:main
+        tess=tess.src.cli:main
     '''
 )

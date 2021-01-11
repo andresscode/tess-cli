@@ -2,7 +2,7 @@ import importlib.util
 import os
 from pathlib import Path
 
-from src.directories import Directory
+from tess.src.directories import Directory
 
 
 def make_dirs(path):

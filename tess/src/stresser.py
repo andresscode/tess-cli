@@ -4,8 +4,8 @@ import subprocess
 
 import click
 
-from src.navigator import find_root_directory, load_external_module
-from src.runner import runner_args, run_timed_subprocess
+from tess.src.navigator import find_root_directory, load_external_module
+from tess.src.runner import runner_args, run_timed_subprocess
 
 
 def run_cmd(args, _in):
@@ -40,8 +40,9 @@ def run_stress(model: str, solution: str, seed: int, number: int, args: list,
         solution_formatted_out = solution_out.stdout.rstrip()
 
         if line != 0:
-            model_formatted_out = model_formatted_out.split('\n')[line-1]
-            solution_formatted_out = solution_formatted_out.split('\n')[line-1]
+            model_formatted_out = model_formatted_out.split('\n')[line - 1]
+            solution_formatted_out = solution_formatted_out.split('\n')[
+                line - 1]
 
         if model_formatted_out == solution_formatted_out:
             click.echo(f'Result: OK\t'

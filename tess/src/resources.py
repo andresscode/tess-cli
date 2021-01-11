@@ -20,20 +20,21 @@ def __files_content_by_ext(pkg: str, ext: str) -> dict:
 
 
 def lang_templates(lang: str) -> dict:
-    pkg = f'resources.templates.{lang}'
+    pkg = f'tess.resources.templates.{lang}'
     ext = f'.{lang}'
     return __files_content_by_ext(pkg, ext)
 
 
 def test_case_templates() -> dict:
-    return __files_content_by_ext('resources.templates.cases', '.txt')
+    return __files_content_by_ext('tess.resources.templates.cases', '.txt')
 
 
 def generator_template(_id: str) -> dict:
-    templates = __files_content_by_ext('resources.templates.generators', '.py')
+    templates = __files_content_by_ext('tess.resources.templates.generators',
+                                       '.py')
     selected = templates[_id]
     return {'generator.py': selected}
 
 
 def runners_meta() -> dict:
-    return loads(__resource_str_utf8('resources.config', 'runners.json'))
+    return loads(__resource_str_utf8('tess.resources.config', 'runners.json'))

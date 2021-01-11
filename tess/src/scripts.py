@@ -10,10 +10,10 @@ def make_completion_script(shell, destination):
     file = Path(f'{path.absolute()}/tess-completion.sh')
     file.touch()
     if shell == 'bash':
-        content = resource_string('resources.scripts',
+        content = resource_string('tess.resources.scripts',
                                   'bash-completion.sh').decode('utf-8')
     elif shell in ['zsh', 'fish']:
-        content = resource_string('resources.scripts',
+        content = resource_string('tess.resources.scripts',
                                   'zsh-completion.sh').decode('utf-8')
     else:
         raise ValueError(f'Shell {shell} not supported.')

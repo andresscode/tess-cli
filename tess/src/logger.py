@@ -2,8 +2,8 @@ from pathlib import Path
 
 import click
 
-from src.directories import Directory
-from src.navigator import debug_solutions_absolute_path, list_files, \
+from tess.src.directories import Directory
+from tess.src.navigator import debug_solutions_absolute_path, list_files, \
     solutions_absolute_path
 
 

@@ -4,12 +4,12 @@ import subprocess
 
 import click
 
-from src.compiler import should_be_compiled, compile_cmd
-from src.directories import Directory
-from src.navigator import list_files, cases_absolute_path, \
+from tess.src.compiler import should_be_compiled, compile_cmd
+from tess.src.directories import Directory
+from tess.src.navigator import list_files, cases_absolute_path, \
     build_absolute_path, solutions_absolute_path, debug_build_absolute_path, \
     debug_solutions_absolute_path
-from src.resources import runners_meta
+from tess.src.resources import runners_meta
 
 
 def runnable_files(ctx, args, incomplete):

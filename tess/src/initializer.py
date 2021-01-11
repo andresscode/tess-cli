@@ -1,8 +1,8 @@
 from os import walk
 
-import src.resources as res
-from src.directories import Directory
-from src.navigator import make_dirs, make_files
+from tess.src import resources as res
+from tess.src.directories import Directory
+from tess.src.navigator import make_dirs, make_files
 
 
 def make_template(path, lang, empty):
