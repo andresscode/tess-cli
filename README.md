@@ -78,12 +78,12 @@ experience:
 
 * **Unit testing:** This is the top priority at this point.
 * **Testing and reporting issues:** You can contribute using the tool and 
-reporting any bugs to my [email](andressbox90@gmail.com).
+reporting any bugs to my [email](mailto:andressbox90@gmail.com).
 * **Code documentation:** Code is not documented, this is critical to make it
 easier for more developers to join in.
 * **OOP migration:** Any contributions refactoring code to make it more 
 object-oriented would be very appreciated. 
 
-Please feel free to [contact me](andressbox90@gmail.com) to report something 
-else that is not part of this documentation or if you want more information 
-about the project and how to contribute.
+Please feel free to [contact me](mailto:andressbox90@gmail.com) to report 
+something else that is not part of this documentation or if you want more 
+information about the project and how to contribute.
