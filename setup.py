@@ -4,11 +4,11 @@ with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setuptools.setup(
-    name='tess-andresscode',
+    name='tess',
     version='0.1.0',
     author='Andres Martinez',
     author_email='andressbox90@gmail.com',
-    description='Stress testing CLI tool.',
+    description='CLI tool for testing algorithms.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/andresscode/tess',
