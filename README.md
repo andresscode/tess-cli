@@ -1,6 +1,5 @@
 # Tess
 
-## Description
 Manage your algorithms' implementations to be run against prepared and 
 auto-generated test cases. Apply Stress Testing to detect issues when 
 implementing new algorithms. Compare algorithms written in different languages 
@@ -51,4 +50,4 @@ on top of the previous one to enable the auto-completion for the shell. Your
     compinit
     . /location/tess-completion.sh
 
-Now, you should be able to start using Tess and its auto-completion feature.
+Now, you should be able to start using Tess with its auto-completion feature on.
