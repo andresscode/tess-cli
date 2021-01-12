@@ -4,7 +4,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setuptools.setup(
-    name='tess',
+    name='tess-cli',
     version='0.1.0',
     author='Andres Martinez',
     author_email='andressbox90@gmail.com',
