@@ -22,7 +22,7 @@ Before installing Tess, please make sure you have installed these dependencies:
 ### Download
 Run the next command from your terminal to download and install Tess:
 
-    pip install -i https://test.pypi.org/simple/ tess-andresscode
+    pip install tess
     
 ## Setup
 After installing Tess and all its dependencies, it is recommended to enable
