@@ -58,6 +58,9 @@ you're ready to go. Now, let's create your first Tess project for a very simple
 algorithmic problem, computing the sum of an array of numbers.
 
 ### Project Initialization
+
+![](gifs/init.gif)
+
 The first step is to initialize a Tess project; for that, you have this command: 
 
     tess init -e
@@ -89,6 +92,9 @@ use any valid input file extension.
 >name of any of the directories or the `generator.py` file.
 
 ### Running an Algorithm
+
+![](gifs/run.gif)
+
 To run an algorithm from the `solutions` directory you have to type the next
 command:
 
@@ -115,6 +121,9 @@ this:
 >relative paths.
 
 ### Debug Mode
+
+![](gifs/debug.gif)
+
 Tess has a simple yet, useful feature to allow you to debug your algorithms
 using native comments. To use this feature you need to append the `@log` 
 annotation to your comments; this annotation will tell Tess to uncomment those
@@ -157,6 +166,9 @@ void fn() {
 ````
 
 ### Stress Testing
+
+![](gifs/stress.gif)
+
 To execute a stress testing you need at least two algorithms; one that will work
 as a ***Model*** and another one that will be the ***Solution*** to be tested. 
 The model is usually a naive implementation to solve an algorithmic problem, 
@@ -245,9 +257,15 @@ If you want to compare just the first line, you can use the command above
 telling Tess to just compare the first line when is executing the stress testing
 and ignore the second one. For this you can run the stress command like this:
 
-    tess stress model.py solution.cpp --line 1
+    tess stress model.py solution --line 1
     
+>***Important:*** *C++* and *Java* files are passed to the stress command with the
+>names of their compiled versions, not their source files.
+
 ### Usage
+
+![](gifs/usage.gif)
+
 For a complete list of the commands, options, and usage of Tess, please use
 the help command:
 
