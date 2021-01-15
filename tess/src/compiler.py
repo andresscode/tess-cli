@@ -1,6 +1,8 @@
 import json
 import os
+import platform
 import subprocess
+from pathlib import Path
 
 import click
 from pkg_resources import resource_string
@@ -105,10 +107,33 @@ def compilable_files(ctx, args, incomplete):
     return [file for file in to_compile if incomplete in file]
 
 
+def resolve_config_path():
+    plat = platform.system()
+    if 'Linux' in plat:
+        path = Path(f'{Directory.CUSTOM_CONFIG_LINUX}/compilers.json')
+    elif 'Darwin' in plat:
+        path = Path(f'{Directory.CUSTOM_CONFIG_MAC}/compilers.json')
+    else:
+        raise ValueError(f'Unknown operating system: {plat}')
+    return path.expanduser()
+
+
+def update_with_custom_config(compilers_meta: dict):
+    path = resolve_config_path()
+    if path.exists() and path.is_file():
+        content = path.read_text(encoding='utf-8')
+        json_content = json.loads(content)
+        for _, value in compilers_meta.items():
+            if value['compiler'] in json_content:
+                if 'flags' in json_content[value['compiler']]:
+                    value['flags'] = json_content[value['compiler']]['flags']
+
+
 def compile_cmd(file, debug=False):
     root_dir = find_root_directory(os.getcwd())
     source_files = get_source_files(root_dir)
     compilers_meta = load_dict('tess.resources.config', 'compilers.json')
+    update_with_custom_config(compilers_meta)
     to_compile = get_files_to_compile(source_files, compilers_meta)
     if file:
         _, ext = os.path.splitext(file)
