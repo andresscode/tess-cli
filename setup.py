@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='tess-cli',
-    version='0.1.0',
+    version='0.1.1',
     author='Andres Martinez',
     author_email='andressbox90@gmail.com',
     description='CLI tool for testing algorithms.',
